@@ -35,6 +35,30 @@ mod test {
             .fold(0, |s, b| (s << 1) + if b { 1 } else { 0 })
     }
 
+    #[test]
+    fn test_binary_rep_all_false() {
+        // Input: 0000_0000
+        let input = vec![false, false, false, false, false, false, false, false];
+        let result = binary_rep(input.into_iter());
+        assert_eq!(result, 0b0000_0000);
+    }
+
+    #[test]
+    fn test_binary_rep_all_true() {
+        // Input: 1111_1111
+        let input = vec![true, true, true, true, true, true, true, true];
+        let result = binary_rep(input.into_iter());
+        assert_eq!(result, 0b1111_1111);
+    }
+
+    #[test]
+    fn test_binary_rep_mixed() {
+        // Input: 1010_0101
+        let input = vec![true, false, true, false, false, true, false, true];
+        let result = binary_rep(input.into_iter());
+        assert_eq!(result, 0b1010_0101);
+    }
+
     fn make_scalars(scalars: impl Iterator<Item = bool>, chunk_size: usize) -> Vec<u8> {
         scalars
             .chunks(chunk_size)
@@ -68,6 +92,7 @@ mod test {
             .map(|chunk: &[G::Affine]| process_chunk::<F, G>(chunk, chunk_size))
             .collect()
     }
+
 
     #[test]
     fn test_msm_basic() {
