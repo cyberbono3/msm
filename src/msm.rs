@@ -2,6 +2,7 @@ use ark_ec::CurveGroup;
 use rayon::iter::IndexedParallelIterator;
 use rayon::iter::IntoParallelRefIterator;
 use rayon::iter::ParallelIterator;
+use rayon::prelude::*;
 
 
 pub fn binary_msm<F, G>(
